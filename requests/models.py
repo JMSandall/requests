@@ -748,7 +748,8 @@ class Response(object):
             if hasattr(self.raw, 'stream'):
                 try:
                     # Special case for Google App Engine
-                    if isinstance(self.raw._original_response._method, int):
+                    if hasattr(self.raw._original_response, '_method') and isinstance(
+                            self.raw._original_response._method, int):
                         while True:
                             chunk = self.raw.read(chunk_size, decode_content=True)
                             if not chunk:
